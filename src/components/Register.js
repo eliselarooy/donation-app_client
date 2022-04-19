@@ -1,32 +1,13 @@
 import React from 'react';
-// import { login } from '../api/auth.js';
-import axios from 'axios';
+import { register } from '../api/auth';
 
-const Login = () => {
+const Register = () => {
   const [formData, setFormData] = React.useState({
+    username: '',
     email: '',
     password: '',
+    password_confirmation: '',
   });
-
-  let errorMessage = '';
-
-  const login = async (credentials) => {
-    const options = {
-      method: 'POST',
-      url: 'http://localhost:8000/authentication/login/',
-      data: credentials,
-    };
-
-    const { data } = await axios.request(options);
-
-    if (data.token) {
-      window.sessionStorage.setItem('token', data.token);
-    } else {
-      window.sessionStorage.removeItem('token');
-    }
-
-    return data;
-  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -37,22 +18,27 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await login(formData);
-      console.log('data', data);
-      errorMessage = data.message;
+      const data = await register(formData);
+      console.log(data);
     } catch (err) {
       console.error(err);
-      console.log(err.response.message);
     }
   };
 
-  console.log('form', formData);
-  console.log('error', errorMessage);
+  console.log(formData);
 
   return (
     <div>
-      <h1>Log in</h1>
+      <h1>Sign up</h1>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={formData.username}
+          onChange={handleChange}
+        />
         <label htmlFor="email">Email</label>
         <input
           type="text"
@@ -69,11 +55,18 @@ const Login = () => {
           value={formData.password}
           onChange={handleChange}
         />
-        <button type="submit">Log in</button>
-        <p>{errorMessage}</p>
+        <label htmlFor="password_confirmation">Password confirmation</label>
+        <input
+          type="password"
+          name="password_confirmation"
+          placeholder="Password confirmation"
+          value={formData.password_confirmation}
+          onChange={handleChange}
+        />
+        <button type="submit">Sign up</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;

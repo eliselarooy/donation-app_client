@@ -1,6 +1,5 @@
 import React from 'react';
 import { getAllDonations } from '../api/data';
-import axios from 'axios';
 
 function Home() {
   const [data, setData] = React.useState(null);

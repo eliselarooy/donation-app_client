@@ -17,3 +17,15 @@ export const login = async (credentials) => {
 
   return data;
 };
+
+export const register = async (credentials) => {
+  const options = {
+    method: 'POST',
+    url: 'http://localhost:8000/authentication/register/',
+    data: credentials,
+  };
+
+  const { data } = await axios.request(options);
+
+  return data;
+};
