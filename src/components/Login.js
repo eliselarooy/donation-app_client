@@ -8,7 +8,7 @@ const Login = () => {
     password: '',
   });
 
-  let errorMessage = '';
+  const [errorMessage, setErrorMessage] = React.useState('');
 
   const login = async (credentials) => {
     const options = {
@@ -39,10 +39,10 @@ const Login = () => {
     try {
       const data = await login(formData);
       console.log('data', data);
-      errorMessage = data.message;
     } catch (err) {
       console.error(err);
-      console.log(err.response.message);
+      console.log('ERROR', err.response.data);
+      setErrorMessage(err.response.data.message);
     }
   };
 
@@ -70,7 +70,7 @@ const Login = () => {
           onChange={handleChange}
         />
         <button type="submit">Log in</button>
-        <p>{errorMessage}</p>
+        <small className="has-text-danger"> {errorMessage}</small>
       </form>
     </div>
   );

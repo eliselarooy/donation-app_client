@@ -9,6 +9,8 @@ const Register = () => {
     password_confirmation: '',
   });
 
+  const [errorMessage, setErrorMessage] = React.useState('');
+
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -21,11 +23,13 @@ const Register = () => {
       const data = await register(formData);
       console.log(data);
     } catch (err) {
-      console.error(err);
+      console.log(err.response.data);
+      setErrorMessage(err.response.data);
     }
   };
 
-  console.log(formData);
+  console.log('form data', formData);
+  console.log('error message', errorMessage[Object.keys(errorMessage)[0]]);
 
   return (
     <div>
@@ -39,6 +43,7 @@ const Register = () => {
           value={formData.username}
           onChange={handleChange}
         />
+        <small className="has-text-danger"> {errorMessage.username}</small>
         <label htmlFor="email">Email</label>
         <input
           type="text"
@@ -47,6 +52,7 @@ const Register = () => {
           value={formData.email}
           onChange={handleChange}
         />
+        <small className="has-text-danger"> {errorMessage.email}</small>
         <label htmlFor="password">Password</label>
         <input
           type="password"
@@ -55,6 +61,7 @@ const Register = () => {
           value={formData.password}
           onChange={handleChange}
         />
+        <small className="has-text-danger"> {errorMessage.password}</small>
         <label htmlFor="password_confirmation">Password confirmation</label>
         <input
           type="password"
@@ -63,6 +70,10 @@ const Register = () => {
           value={formData.password_confirmation}
           onChange={handleChange}
         />
+        <small className="has-text-danger">
+          {' '}
+          {errorMessage.password_confirmation}
+        </small>
         <button type="submit">Sign up</button>
       </form>
     </div>
