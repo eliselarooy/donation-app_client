@@ -10,3 +10,16 @@ export const getAllDonations = async () => {
 
   return data;
 };
+
+export const getAllDonationsForUser = async () => {
+  const options = {
+    method: 'GET',
+    url: 'http://localhost:8000/donations/user/single/',
+    headers: {
+      authorization: `Bearer ${window.sessionStorage.getItem('token')}`,
+    },
+  };
+  const { data } = await axios.request(options);
+
+  return data;
+};

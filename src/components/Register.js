@@ -1,5 +1,5 @@
 import React from 'react';
-import { register } from '../api/auth';
+import { login, register } from '../api/auth';
 
 const Register = () => {
   const [formData, setFormData] = React.useState({
@@ -22,6 +22,7 @@ const Register = () => {
     try {
       const data = await register(formData);
       console.log(data);
+      await login(formData);
     } catch (err) {
       console.log(err.response.data);
       setErrorMessage(err.response.data);
