@@ -23,3 +23,14 @@ export const getAllDonationsForUser = async () => {
 
   return data;
 };
+
+export const getAllCharities = async () => {
+  const options = {
+    method: 'GET',
+    url: 'http://localhost:8000/charities/',
+  };
+
+  const { data } = await axios.request(options);
+
+  return data;
+};

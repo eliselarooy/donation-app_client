@@ -14,6 +14,10 @@ const Profile = () => {
 
   console.log(data);
 
+  if (!data) {
+    return <p>Loading...</p>;
+  }
+
   return <p>{JSON.stringify(data)}</p>;
 };
 
