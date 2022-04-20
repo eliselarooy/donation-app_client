@@ -19,7 +19,7 @@ const Navbar = () => {
           <Link to={'/profile'} className="navbar-item">
             Profile
           </Link>
-          <Link to={'/'} className="navbar-item" onClick={logOut}>
+          <Link to={'/'} onClick={logOut} className="navbar-item">
             Log Out
           </Link>
         </div>

@@ -1,8 +1,10 @@
 import React from 'react';
 // import { login } from '../api/auth.js';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     email: '',
     password: '',
@@ -41,7 +43,6 @@ const Login = () => {
       console.log('data', data);
     } catch (err) {
       console.error(err);
-      console.log('ERROR', err.response.data);
       setErrorMessage(err.response.data.message);
     }
   };
@@ -53,23 +54,35 @@ const Login = () => {
     <div>
       <h1>Log in</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <button type="submit">Log in</button>
+        <div className="field">
+          <label htmlFor="email">Email</label>
+          <div className="control">
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className="field">
+          <label htmlFor="password">Password</label>
+          <div className="control">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <button type="submit" className="button">
+          Log in
+        </button>
         <small className="has-text-danger"> {errorMessage}</small>
       </form>
     </div>

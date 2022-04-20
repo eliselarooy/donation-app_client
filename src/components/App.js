@@ -6,6 +6,7 @@ import Register from './Register';
 import ProgressBar from './ProgressBar';
 import Navbar from './Navbar';
 import Profile from './Profile';
+import Footer from './Footer';
 
 import '../styles/style.scss';
 
@@ -19,6 +20,7 @@ const App = () => (
       <Route path="/profile" element={<Profile />} />
       <Route path="/progress" element={<ProgressBar done="75" />} />
     </Routes>
+    <Footer />
   </BrowserRouter>
 );
 
