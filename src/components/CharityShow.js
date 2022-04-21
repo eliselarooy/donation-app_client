@@ -31,8 +31,17 @@ const CharityShow = () => {
         <div className="column is-half">
           <h1 className="title">{data.name}</h1>
           <p>{data.description}</p>
-          <p>Categories: {data.category}</p>
-          {getLoggedInUserId() && <Donate charityId={id} />}
+          <br />
+          <p>
+            Categories:{' '}
+            {data.category.map((item) => (
+              <span key={item.id}>{item.name} </span>
+            ))}
+          </p>
+          <br />
+          {getLoggedInUserId() && (
+            <Donate charityId={id} charityName={data.name} />
+          )}
         </div>
       </div>
     </div>

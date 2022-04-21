@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getAllCharities } from '../api/data.js';
+import { getLoggedInUserId } from '../lib/auth.js';
 
 function Home() {
   const [data, setData] = React.useState(null);
@@ -43,15 +44,19 @@ function Home() {
           );
         })}
       </div>
-      <Link to="/register" className="button">
-        Sign up to get started!
-      </Link>
-      <p>
-        <span>Already have an account? </span>
-        <span>
-          <Link to="/login">Log in</Link>
-        </span>
-      </p>
+      {!getLoggedInUserId() && (
+        <>
+          <Link to="/register" className="button">
+            Sign up to get started!
+          </Link>
+          <p>
+            <span>Already have an account? </span>
+            <span>
+              <Link to="/login">Log in</Link>
+            </span>
+          </p>
+        </>
+      )}
     </>
   );
 }

@@ -7,12 +7,13 @@ const Profile = () => {
   React.useEffect(() => {
     const getData = async () => {
       const donationData = await getAllDonationsForUser();
+      donationData.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
       setData(donationData);
     };
     getData();
   }, []);
 
-  console.log(data);
+  console.log('data', data);
 
   if (!data) {
     return <p>Loading...</p>;
@@ -20,7 +21,7 @@ const Profile = () => {
 
   return (
     <div className="container">
-      <h1 className="title">Profile page</h1>
+      <h1 className="title">Your Donations</h1>
       <div className="columns">
         <div className="column is-one-third">
           <h3 className="has-text-weight-bold">Amount</h3>
@@ -39,7 +40,7 @@ const Profile = () => {
               <p>£{item.total_amount}</p>
             </div>
             <div className="column is-one-third">
-              <p>{item.charity}</p>
+              <p>{item.charity.name}</p>
             </div>
             <div className="column is-one-third">
               <p>{item.date}</p>
