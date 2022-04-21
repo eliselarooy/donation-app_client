@@ -6,6 +6,7 @@ import Register from './Register';
 import Navbar from './Navbar';
 import Profile from './Profile';
 import Footer from './Footer';
+import CharityShow from './CharityShow';
 
 import '../styles/style.scss';
 
@@ -17,6 +18,7 @@ const App = () => (
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/charities/:id" element={<CharityShow />} />
     </Routes>
     <Footer />
   </BrowserRouter>

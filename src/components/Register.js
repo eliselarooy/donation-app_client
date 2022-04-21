@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import { login, register } from '../api/auth';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     username: '',
     email: '',
@@ -23,6 +25,7 @@ const Register = () => {
       const data = await register(formData);
       console.log(data);
       await login(formData);
+      navigate('/profile');
     } catch (err) {
       console.log(err.response.data);
       setErrorMessage(err.response.data);
@@ -35,48 +38,85 @@ const Register = () => {
   return (
     <div>
       <h1>Sign up</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-        <small className="has-text-danger"> {errorMessage.username}</small>
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <small className="has-text-danger"> {errorMessage.email}</small>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <small className="has-text-danger"> {errorMessage.password}</small>
-        <label htmlFor="password_confirmation">Password confirmation</label>
-        <input
-          type="password"
-          name="password_confirmation"
-          placeholder="Password confirmation"
-          value={formData.password_confirmation}
-          onChange={handleChange}
-        />
-        <small className="has-text-danger">
-          {' '}
-          {errorMessage.password_confirmation}
-        </small>
-        <button type="submit">Sign up</button>
-      </form>
+      <div className="box">
+        <form onSubmit={handleSubmit}>
+          <div className="field">
+            <label htmlFor="username" className="label">
+              Username
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={formData.username}
+                onChange={handleChange}
+              />
+            </div>
+            <p className="help has-text-danger">{errorMessage.username}</p>
+          </div>
+
+          <div className="field">
+            <label htmlFor="email" className="label">
+              Email
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+            <p className="help has-text-danger">{errorMessage.email}</p>
+          </div>
+
+          <div className="field">
+            <label htmlFor="password" className="label">
+              Password
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
+            <p className="help has-text-danger">{errorMessage.password}</p>
+          </div>
+
+          <div className="field">
+            <label htmlFor="password_confirmation" className="label">
+              Password confirmation
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="password"
+                name="password_confirmation"
+                placeholder="Password confirmation"
+                value={formData.password_confirmation}
+                onChange={handleChange}
+              />
+            </div>
+            <p className="help has-text-danger">
+              {errorMessage.password_confirmation}
+            </p>
+          </div>
+
+          <div className="control">
+            <button type="submit" className="button">
+              Sign up
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

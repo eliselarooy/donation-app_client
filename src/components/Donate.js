@@ -1,12 +1,13 @@
 import React from 'react';
-import { login } from '../api/auth.js';
+import { createDonation } from '../api/data.js';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Donate = ({ charityId }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
-    email: '',
-    password: '',
+    total_amount: '',
+    date: '',
+    charity: charityId,
   });
 
   const [errorMessage, setErrorMessage] = React.useState('');
@@ -20,50 +21,51 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await login(formData);
+      const data = await createDonation(formData);
       console.log('data', data);
       navigate('/profile');
     } catch (err) {
       console.error(err);
-      setErrorMessage(err.response.data.message);
+      setErrorMessage(err.response.data);
     }
   };
 
   console.log('form', formData);
   console.log('error', errorMessage);
+  const firstError = errorMessage[Object.keys(errorMessage)[0]];
 
   return (
     <div>
-      <h1>Log in</h1>
+      <h1>Add donation</h1>
       <div className="box">
         <form onSubmit={handleSubmit}>
           <div className="field">
-            <label htmlFor="email" className="label">
-              Email
+            <label htmlFor="total_amount" className="label">
+              Amount
             </label>
             <div className="control">
               <input
                 className="input"
                 type="text"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
+                name="total_amount"
+                placeholder="Amount"
+                value={formData.total_amount}
                 onChange={handleChange}
               />
             </div>
           </div>
 
           <div className="field">
-            <label htmlFor="password" className="label">
-              Password
+            <label htmlFor="date" className="label">
+              Date
             </label>
             <div className="control">
               <input
                 className="input"
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
+                type="date"
+                name="date"
+                placeholder="Date"
+                value={formData.date}
                 onChange={handleChange}
               />
             </div>
@@ -71,14 +73,14 @@ const Login = () => {
 
           <div className="control">
             <button type="submit" className="button">
-              Log in
+              Add donation
             </button>
           </div>
-          <p className="help is-danger">{errorMessage}</p>
+          <p className="help is-danger">{firstError}</p>
         </form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Donate;
