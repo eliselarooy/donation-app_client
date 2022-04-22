@@ -23,12 +23,12 @@ const CharityShow = () => {
   return (
     <div className="container">
       <div className="columns">
-        <div className="column is-half">
+        <div className="column is-one-third">
           <figure className="image">
             <img src={data.logo} alt={data.name} />
           </figure>
         </div>
-        <div className="column is-half">
+        <div className="column is-two-thirds">
           <h1 className="title">{data.name}</h1>
           <p>{data.description}</p>
           <br />

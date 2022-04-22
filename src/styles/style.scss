@@ -1,2 +1,13 @@
+$pink: rgb(234, 74, 170);
+$primary: $pink;
+
 @import '~bulma/bulma.sass';
 
+.hero-background {
+  background-image: linear-gradient(to right,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.7)), url('https://static.boredpanda.com/blog/wp-content/uploads/2019/02/Cuteness-Overload-These-30-Wildlife-Photos-by-Austrian-Photographer-will-melt-your-heart-5c6607fb0792a__880.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

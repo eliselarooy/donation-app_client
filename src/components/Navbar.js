@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar my-4">
       <div className="navbar-brand">
         <Link to={'/'} className="navbar-item">
           Home
@@ -19,21 +19,33 @@ const Navbar = () => {
       </div>
       {getLoggedInUserId() ? (
         <div className="navbar-end">
-          <Link to={'/profile'} className="navbar-item">
-            Profile
-          </Link>
-          <Link to={'/'} onClick={logOut} className="navbar-item">
-            Log Out
-          </Link>
+          <div className="navbar-item">
+            <div className="buttons">
+              <Link to={'/profile'} className="button is-primary">
+                Profile
+              </Link>
+              <Link
+                to={'/'}
+                onClick={logOut}
+                className="button is-primary is-light"
+              >
+                Log Out
+              </Link>
+            </div>
+          </div>
         </div>
       ) : (
         <div className="navbar-end">
-          <Link to={'/register'} className="navbar-item">
-            Sign up
-          </Link>
-          <Link to={'/login'} className="navbar-item">
-            Log in
-          </Link>
+          <div className="navbar-item">
+            <div className="buttons">
+              <Link to={'/register'} className="button is-primary">
+                Sign up
+              </Link>
+              <Link to={'/login'} className="button is-primary is-light">
+                Log in
+              </Link>
+            </div>
+          </div>
         </div>
       )}
     </nav>
