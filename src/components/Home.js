@@ -3,8 +3,24 @@ import { Link } from 'react-router-dom';
 import { getAllCharities } from '../api/data.js';
 import { getLoggedInUserId } from '../lib/auth.js';
 
+const filterMap = {
+  All: () => true,
+  Health: (charity) =>
+    charity.category.some((category) => category.name === 'Health'),
+  Animals: (charity) =>
+    charity.category.some((category) => category.name === 'Animals'),
+  Education: (charity) =>
+    charity.category.some((category) => category.name === 'Education'),
+  Environment: (charity) =>
+    charity.category.some((category) => category.name === 'Environment'),
+};
+
+const filterNames = Object.keys(filterMap);
+
 function Home() {
   const [data, setData] = React.useState(null);
+  const [filter, setFilter] = React.useState('All');
+  const [selected, setSelected] = React.useState('All');
 
   React.useEffect(() => {
     const getData = async () => {
@@ -14,7 +30,20 @@ function Home() {
     getData();
   }, []);
 
-  console.log(data);
+  const handleFilter = (e) => {
+    setSelected(e.target.name);
+    setFilter(e.target.name);
+  };
+
+  let filteredData;
+
+  const isSelected = (name) => {
+    return selected.includes(name);
+  };
+
+  if (data) {
+    filteredData = data.filter(filterMap[filter]);
+  }
 
   if (!data) {
     return <p>Loading...</p>;
@@ -44,10 +73,25 @@ function Home() {
         </section>
       )}
 
-      <section>
+      <section className="container">
         <h2 className="title">Our Charities</h2>
+        <div className="buttons">
+          {filterNames.map((item) => {
+            return (
+              <button
+                key={item}
+                type="button"
+                className={isSelected(item) ? 'is-primary button' : 'button'}
+                name={item}
+                onClick={handleFilter}
+              >
+                {item}
+              </button>
+            );
+          })}
+        </div>
         <div className="columns is-multiline">
-          {data.map((item) => {
+          {filteredData.map((item) => {
             return (
               <div
                 key={item.id}

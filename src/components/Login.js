@@ -46,8 +46,6 @@ const Login = () => {
     }
   };
 
-  console.log('form', formData);
-
   return (
     <div>
       <div className="box">

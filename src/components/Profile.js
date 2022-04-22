@@ -6,6 +6,7 @@ const Profile = () => {
   const [data, setData] = React.useState(null);
   const chartLabels = ['Health', 'Animals', 'Education', 'Environment'];
   let chartData = [0, 0, 0, 0];
+  let totalDonated = 0;
 
   React.useEffect(() => {
     const getData = async () => {
@@ -20,20 +21,22 @@ const Profile = () => {
 
   if (data) {
     data.forEach((item) => {
-      if (item.charity.category[0].name === 'Health') {
+      totalDonated += parseFloat(item.total_amount);
+      if (item.charity.category[0].name === chartLabels[0]) {
         chartData[0] += parseFloat(item.total_amount);
       }
-      if (item.charity.category[0].name === 'Animals') {
+      if (item.charity.category[0].name === chartLabels[1]) {
         chartData[1] += parseFloat(item.total_amount);
       }
-      if (item.charity.category[0].name === 'Education') {
+      if (item.charity.category[0].name === chartLabels[2]) {
         chartData[2] += parseFloat(item.total_amount);
       }
-      if (item.charity.category[0].name === 'Environment') {
+      if (item.charity.category[0].name === chartLabels[3]) {
         chartData[3] += parseFloat(item.total_amount);
       }
     });
     console.log(chartData);
+    console.log(totalDonated);
   }
 
   if (!data) {
@@ -42,36 +45,33 @@ const Profile = () => {
 
   return (
     <>
-      <div>
+      <div className="container">
         <h1 className="title">Your Donations</h1>
-        <section className="notification">
-          <div className="columns">
-            <div className="column is-one-third">
-              <h3 className="has-text-weight-bold">Amount</h3>
-            </div>
-            <div className="column is-one-third">
-              <h3 className="has-text-weight-bold">Charity</h3>
-            </div>
-            <div className="column is-one-third">
-              <h3 className="has-text-weight-bold">Date</h3>
-            </div>
-          </div>
-          {data.map((item) => {
-            return (
-              <div key={item.id} className="columns">
-                <div className="column is-one-third">
-                  <p>£{item.total_amount}</p>
-                </div>
-                <div className="column is-one-third">
-                  <p>{item.charity.name}</p>
-                </div>
-                <div className="column is-one-third">
-                  <p>{item.date}</p>
-                </div>
-              </div>
-            );
-          })}
-        </section>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Amount</th>
+              <th>Charity</th>
+              <th>Date Collected</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Total: £{totalDonated}</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {data.map((item) => {
+              return (
+                <tr key={item.id}>
+                  <td>£{item.total_amount}</td>
+                  <td>{item.charity.name}</td>
+                  <td>{item.date}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
 
       <div className="container">
