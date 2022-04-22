@@ -11,29 +11,56 @@ const Register = () => {
     password_confirmation: '',
   });
 
-  const [errorMessage, setErrorMessage] = React.useState('');
+  const [required, setRequired] = React.useState({
+    username: '*',
+    email: '*',
+    password: '*',
+    password_confirmation: '*',
+  });
+
+  const [responseErrorMessage, setResponseErrorMessage] = React.useState('');
+
+  const [error, setError] = React.useState('');
 
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    if (value === '') {
+      setRequired({ ...required, [name]: '*' });
+    } else {
+      setRequired({ ...required, [name]: '' });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = await register(formData);
-      console.log(data);
-      await login(formData);
-      navigate('/profile');
-    } catch (err) {
-      console.log(err.response.data);
-      setErrorMessage(err.response.data);
+    if (
+      formData.username === '' ||
+      formData.email === '' ||
+      formData.password === '' ||
+      formData.password_confirmation === ''
+    ) {
+      setError('Please complete all fields');
+    } else {
+      setError('');
+      try {
+        const data = await register(formData);
+        console.log(data);
+        await login(formData);
+        navigate('/profile');
+      } catch (err) {
+        console.log(err.response.data);
+        setResponseErrorMessage(err.response.data);
+      }
     }
   };
 
   console.log('form data', formData);
-  console.log('error message', errorMessage[Object.keys(errorMessage)[0]]);
+  console.log(
+    'error message',
+    responseErrorMessage[Object.keys(responseErrorMessage)[0]]
+  );
 
   return (
     <div>
@@ -42,9 +69,10 @@ const Register = () => {
         <form onSubmit={handleSubmit}>
           <div className="field">
             <label htmlFor="username" className="label">
-              Username
+              Username{' '}
+              <small className="has-text-danger">{required.username}</small>
             </label>
-            <div className="control">
+            <div className="control has-icons-left">
               <input
                 className="input"
                 type="text"
@@ -53,15 +81,20 @@ const Register = () => {
                 value={formData.username}
                 onChange={handleChange}
               />
+              <span className="icon is-left">
+                <i className="fas fa-user"></i>
+              </span>
             </div>
-            <p className="help has-text-danger">{errorMessage.username}</p>
+            <p className="help has-text-danger">
+              {responseErrorMessage.username}
+            </p>
           </div>
 
           <div className="field">
             <label htmlFor="email" className="label">
-              Email
+              Email <small className="has-text-danger">{required.email}</small>
             </label>
-            <div className="control">
+            <div className="control has-icons-left">
               <input
                 className="input"
                 type="text"
@@ -70,15 +103,19 @@ const Register = () => {
                 value={formData.email}
                 onChange={handleChange}
               />
+              <span className="icon is-left">
+                <i className="fas fa-envelope"></i>
+              </span>
             </div>
-            <p className="help has-text-danger">{errorMessage.email}</p>
+            <p className="help has-text-danger">{responseErrorMessage.email}</p>
           </div>
 
           <div className="field">
             <label htmlFor="password" className="label">
-              Password
+              Password{' '}
+              <small className="has-text-danger">{required.password}</small>
             </label>
-            <div className="control">
+            <div className="control has-icons-left">
               <input
                 className="input"
                 type="password"
@@ -87,15 +124,23 @@ const Register = () => {
                 value={formData.password}
                 onChange={handleChange}
               />
+              <span className="icon is-left">
+                <i className="fas fa-lock"></i>
+              </span>
             </div>
-            <p className="help has-text-danger">{errorMessage.password}</p>
+            <p className="help has-text-danger">
+              {responseErrorMessage.password}
+            </p>
           </div>
 
           <div className="field">
             <label htmlFor="password_confirmation" className="label">
-              Password confirmation
+              Password confirmation{' '}
+              <small className="has-text-danger">
+                {required.password_confirmation}
+              </small>
             </label>
-            <div className="control">
+            <div className="control has-icons-left">
               <input
                 className="input"
                 type="password"
@@ -104,9 +149,12 @@ const Register = () => {
                 value={formData.password_confirmation}
                 onChange={handleChange}
               />
+              <span className="icon is-left">
+                <i className="fas fa-lock"></i>
+              </span>
             </div>
             <p className="help has-text-danger">
-              {errorMessage.password_confirmation}
+              {responseErrorMessage.password_confirmation}
             </p>
           </div>
 
@@ -115,6 +163,8 @@ const Register = () => {
               Sign up
             </button>
           </div>
+
+          <p className="help is-danger">{error}</p>
         </form>
       </div>
     </div>

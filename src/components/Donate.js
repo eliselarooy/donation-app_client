@@ -10,6 +10,8 @@ const Donate = ({ charityId, charityName }) => {
     charity: charityId,
   });
 
+  const [responseErrorMessage, setResponseErrorMessage] = React.useState('');
+
   const [errorMessage, setErrorMessage] = React.useState('');
 
   const handleChange = (e) => {
@@ -20,19 +22,39 @@ const Donate = ({ charityId, charityName }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = await createDonation(formData);
-      console.log('data', data);
-      navigate('/profile');
-    } catch (err) {
-      console.error(err);
-      setErrorMessage(err.response.data);
+    let messages = { total_amount: '', date: '' };
+    if (formData.total_amount <= 0) {
+      messages = {
+        ...messages,
+        total_amount: 'Amount must be greater than zero',
+      };
+    }
+    if (formData.total_amount === '') {
+      messages = { ...messages, total_amount: 'Please enter an amount' };
+    }
+    if (formData.date === '') {
+      messages = { ...messages, date: 'Please select a date' };
+    }
+    if (messages.total_amount !== '' || messages.date !== '') {
+      setErrorMessage(messages);
+      console.log('error message', errorMessage);
+    } else {
+      setErrorMessage('');
+      try {
+        const data = await createDonation(formData);
+        console.log('data', data);
+        navigate('/profile');
+      } catch (err) {
+        console.error(err);
+        setResponseErrorMessage(err.response.data);
+      }
     }
   };
 
   console.log('form', formData);
-  console.log('error', errorMessage);
-  const firstError = errorMessage[Object.keys(errorMessage)[0]];
+  console.log('error', responseErrorMessage);
+  const firstError = responseErrorMessage[Object.keys(responseErrorMessage)[0]];
+  console.log('error message', errorMessage);
 
   return (
     <div className="box">
@@ -40,7 +62,7 @@ const Donate = ({ charityId, charityName }) => {
       <form onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="total_amount" className="label">
-            Amount
+            Amount (£)
           </label>
           <div className="control">
             <input
@@ -54,6 +76,7 @@ const Donate = ({ charityId, charityName }) => {
               onChange={handleChange}
             />
           </div>
+          <p className="help has-text-danger">{errorMessage.total_amount}</p>
         </div>
 
         <div className="field">
@@ -70,6 +93,7 @@ const Donate = ({ charityId, charityName }) => {
               onChange={handleChange}
             />
           </div>
+          <p className="help has-text-danger">{errorMessage.date}</p>
         </div>
 
         <div className="control">

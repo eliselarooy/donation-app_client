@@ -55,7 +55,7 @@ const Login = () => {
             <label htmlFor="email" className="label">
               Email <small className="has-text-danger">{required.email}</small>
             </label>
-            <div className="control">
+            <div className="control has-icons-left">
               <input
                 className="input"
                 type="text"
@@ -64,6 +64,9 @@ const Login = () => {
                 value={formData.email}
                 onChange={handleChange}
               />
+              <span className="icon is-left">
+                <i className="fas fa-envelope"></i>
+              </span>
             </div>
           </div>
 
@@ -72,7 +75,7 @@ const Login = () => {
               Password{' '}
               <small className="has-text-danger">{required.password}</small>
             </label>
-            <div className="control">
+            <div className="control has-icons-left">
               <input
                 className="input"
                 type="password"
@@ -81,6 +84,9 @@ const Login = () => {
                 value={formData.password}
                 onChange={handleChange}
               />
+              <span className="icon is-left">
+                <i className="fas fa-lock"></i>
+              </span>
             </div>
           </div>
 
