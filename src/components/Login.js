@@ -9,37 +9,53 @@ const Login = () => {
     password: '',
   });
 
-  const [errorMessage, setErrorMessage] = React.useState('');
+  const [responseErrorMessage, setResponseErrorMessage] = React.useState('');
+
+  const [required, setRequired] = React.useState({
+    email: '*',
+    password: '*',
+  });
+
+  const [error, setError] = React.useState('');
 
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    if (value === '') {
+      setRequired({ ...required, [name]: '*' });
+    } else {
+      setRequired({ ...required, [name]: '' });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = await login(formData);
-      console.log('data', data);
-      navigate('/profile');
-    } catch (err) {
-      console.error(err);
-      setErrorMessage(err.response.data.message);
+    if (formData.email === '' || formData.password === '') {
+      setError('Email and password are required');
+    } else {
+      setError('');
+      try {
+        const data = await login(formData);
+        console.log('data', data);
+        navigate('/profile');
+      } catch (err) {
+        console.error(err);
+        setResponseErrorMessage(err.response.data.message);
+      }
     }
   };
 
   console.log('form', formData);
-  console.log('error', errorMessage);
 
   return (
     <div>
-      <h1>Log in</h1>
       <div className="box">
+        <h1 className="title">Log in</h1>
         <form onSubmit={handleSubmit}>
           <div className="field">
             <label htmlFor="email" className="label">
-              Email
+              Email <small className="has-text-danger">{required.email}</small>
             </label>
             <div className="control">
               <input
@@ -55,7 +71,8 @@ const Login = () => {
 
           <div className="field">
             <label htmlFor="password" className="label">
-              Password
+              Password{' '}
+              <small className="has-text-danger">{required.password}</small>
             </label>
             <div className="control">
               <input
@@ -74,7 +91,8 @@ const Login = () => {
               Log in
             </button>
           </div>
-          <p className="help is-danger">{errorMessage}</p>
+          <p className="help is-danger">{responseErrorMessage}</p>
+          <p className="help is-danger">{error}</p>
         </form>
       </div>
     </div>
