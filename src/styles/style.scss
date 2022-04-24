@@ -1,7 +1,14 @@
 $pink: rgb(234, 74, 170);
-$primary: $pink;
+$skyblue: #81a7f8;
+$primary: $skyblue;
+$link: rgb(236, 77, 130);
 
 @import '~bulma/bulma.sass';
+
+*, a, button {
+  font-family: 'Sora',
+  sans-serif;
+}
 
 .hero-background {
   background-image: linear-gradient(to right,
@@ -10,4 +17,8 @@ $primary: $pink;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.full-height-content {
+  min-height: calc(100vh - 72px - 168px);
 }

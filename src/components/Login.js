@@ -1,6 +1,6 @@
 import React from 'react';
 import { login } from '../api/auth.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -47,8 +47,8 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <div className="box">
+    <div className="full-height-content is-justify-content-center is-flex is-align-items-center has-background-primary-light">
+      <div className="box p-6">
         <h1 className="title">Log in</h1>
         <form onSubmit={handleSubmit}>
           <div className="field">
@@ -91,13 +91,21 @@ const Login = () => {
           </div>
 
           <div className="control">
-            <button type="submit" className="button">
+            <button type="submit" className="button is-primary">
               Log in
             </button>
           </div>
           <p className="help is-danger">{responseErrorMessage}</p>
           <p className="help is-danger">{error}</p>
         </form>
+
+        <br />
+        <p className="control">
+          <span>Don&apos;t have an account yet? </span>
+          <Link to="/register">
+            <span>Sign up</span>
+          </Link>
+        </p>
       </div>
     </div>
   );

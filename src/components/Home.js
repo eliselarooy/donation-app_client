@@ -53,18 +53,19 @@ function Home() {
     <>
       <section className="hero is-large hero-background">
         <div className="hero-body">
-          <h1 className="title has-text-white">
-            Donation website something something
-          </h1>
+          <h1 className="title is-size-1 has-text-white">Donate!</h1>
+          <h2 className="subtitle has-text-white">
+            Find a cause and start today
+          </h2>
         </div>
       </section>
 
       {!getLoggedInUserId() && (
-        <section>
-          <Link to="/register" className="button">
+        <section className="py-6 has-text-centered has-background-primary-light">
+          <Link to="/register" className="button is-primary">
             Sign up to get started!
           </Link>
-          <p>
+          <p className="py-4">
             <span>Already have an account? </span>
             <span>
               <Link to="/login">Log in</Link>
@@ -73,7 +74,7 @@ function Home() {
         </section>
       )}
 
-      <section className="container">
+      <section className="container py-6">
         <h2 className="title">Our Charities</h2>
         <div className="buttons">
           {filterNames.map((item) => {

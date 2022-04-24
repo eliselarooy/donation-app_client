@@ -44,7 +44,7 @@ const Profile = () => {
   }
 
   return (
-    <>
+    <div className="has-full-height-content">
       <div className="container">
         <h1 className="title">Your Donations</h1>
         <table className="table">
@@ -74,14 +74,14 @@ const Profile = () => {
         </table>
       </div>
 
-      <div className="container">
+      <div className="container p-6">
         <div className="columns is-centered">
           <div className="column is-half-desktop is-third-tablet is-one-mobile">
             <PieChart chartData={chartData} />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import { login, register } from '../api/auth';
 
 const Register = () => {
@@ -63,8 +64,8 @@ const Register = () => {
   );
 
   return (
-    <div>
-      <div className="box">
+    <div className="full-height-content is-justify-content-center is-flex is-align-items-center has-background-primary-light">
+      <div className="box p-6">
         <h1 className="title">Sign up</h1>
         <form onSubmit={handleSubmit}>
           <div className="field">
@@ -159,13 +160,21 @@ const Register = () => {
           </div>
 
           <div className="control">
-            <button type="submit" className="button">
+            <button type="submit" className="button is-primary">
               Sign up
             </button>
           </div>
 
           <p className="help is-danger">{error}</p>
         </form>
+
+        <br />
+        <p className="control">
+          <span>Already have an account? </span>
+          <Link to="/login">
+            <span>Log in</span>
+          </Link>
+        </p>
       </div>
     </div>
   );
