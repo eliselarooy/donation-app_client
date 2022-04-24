@@ -1,10 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { getCharityById } from '../api/data.js';
-import { getLoggedInUserId } from '../lib/auth.js';
 import Donate from './Donate';
+import { UserContext } from './UserContext.js';
 
 const CharityShow = () => {
+  const { user } = React.useContext(UserContext);
   const { id } = useParams();
   const [data, setData] = React.useState(null);
 
@@ -39,9 +40,7 @@ const CharityShow = () => {
             ))}
           </p>
           <br />
-          {getLoggedInUserId() && (
-            <Donate charityId={id} charityName={data.name} />
-          )}
+          {user && <Donate charityId={id} charityName={data.name} />}
         </div>
       </div>
     </div>

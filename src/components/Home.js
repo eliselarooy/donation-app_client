@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getAllCharities } from '../api/data.js';
+import { UserContext } from './UserContext.js';
 
 const filterMap = {
   All: () => true,
@@ -16,10 +17,12 @@ const filterMap = {
 
 const filterNames = Object.keys(filterMap);
 
-function Home(props) {
+function Home() {
   const [data, setData] = React.useState(null);
   const [filter, setFilter] = React.useState('All');
   const [selected, setSelected] = React.useState('All');
+
+  const { user } = React.useContext(UserContext);
 
   React.useEffect(() => {
     const getData = async () => {
@@ -59,7 +62,7 @@ function Home(props) {
         </div>
       </section>
 
-      {!props.loggedIn && (
+      {!user && (
         <section className="py-6 has-text-centered has-background-primary-light">
           <Link to="/register" className="button is-primary">
             Sign up to get started!

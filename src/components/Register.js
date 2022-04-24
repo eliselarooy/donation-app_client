@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { login, register } from '../api/auth';
 import { getLoggedInUserId } from '../lib/auth';
+import { UserContext } from './UserContext';
 
-const Register = (props) => {
+const Register = () => {
+  const { setUser } = React.useContext(UserContext);
+
   const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     username: '',
@@ -50,7 +53,7 @@ const Register = (props) => {
         const data = await register(formData);
         console.log(data);
         await login(formData);
-        props.setLoggedIn(getLoggedInUserId());
+        setUser(getLoggedInUserId());
         navigate('/profile');
       } catch (err) {
         console.log(err.response.data);
@@ -59,7 +62,6 @@ const Register = (props) => {
     }
   };
 
-  console.log('form data', formData);
   console.log(
     'error message',
     responseErrorMessage[Object.keys(responseErrorMessage)[0]]
