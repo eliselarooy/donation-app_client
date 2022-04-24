@@ -1,13 +1,16 @@
 import React from 'react';
 import { login } from '../api/auth.js';
 import { useNavigate, Link } from 'react-router-dom';
+import { getLoggedInUserId } from '../lib/auth.js';
 
-const Login = () => {
+const Login = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     email: '',
     password: '',
   });
+
+  console.log('props', props);
 
   const [responseErrorMessage, setResponseErrorMessage] = React.useState('');
 
@@ -38,6 +41,7 @@ const Login = () => {
       try {
         const data = await login(formData);
         console.log('data', data);
+        props.setLoggedIn(getLoggedInUserId());
         navigate('/profile');
       } catch (err) {
         console.error(err);

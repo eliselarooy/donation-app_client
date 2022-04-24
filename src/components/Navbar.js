@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { getLoggedInUserId } from '../lib/auth.js';
 import { useNavigate } from 'react-router';
 
-const Navbar = () => {
+const Navbar = (props) => {
   const navigate = useNavigate();
   const logOut = () => {
     sessionStorage.removeItem('token');
+    props.setLoggedIn(getLoggedInUserId());
     navigate('/');
   };
 
@@ -17,7 +18,7 @@ const Navbar = () => {
           Home
         </Link>
       </div>
-      {getLoggedInUserId() ? (
+      {props.loggedIn ? (
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">

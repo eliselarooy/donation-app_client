@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getAllCharities } from '../api/data.js';
-import { getLoggedInUserId } from '../lib/auth.js';
 
 const filterMap = {
   All: () => true,
@@ -17,7 +16,7 @@ const filterMap = {
 
 const filterNames = Object.keys(filterMap);
 
-function Home() {
+function Home(props) {
   const [data, setData] = React.useState(null);
   const [filter, setFilter] = React.useState('All');
   const [selected, setSelected] = React.useState('All');
@@ -60,7 +59,7 @@ function Home() {
         </div>
       </section>
 
-      {!getLoggedInUserId() && (
+      {!props.loggedIn && (
         <section className="py-6 has-text-centered has-background-primary-light">
           <Link to="/register" className="button is-primary">
             Sign up to get started!
