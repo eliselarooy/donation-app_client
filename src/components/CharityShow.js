@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getCharityById } from '../api/data.js';
 import Donate from './Donate';
 import { UserContext } from './UserContext.js';
@@ -23,7 +23,7 @@ const CharityShow = () => {
 
   return (
     <div className="container full-height-content">
-      <div className="columns">
+      <div className="columns py-6">
         <div className="column is-one-third">
           <figure className="image">
             <img src={data.logo} alt={data.name} />
@@ -39,10 +39,23 @@ const CharityShow = () => {
               <span key={item.id}>{item.name} </span>
             ))}
           </p>
-          <br />
-          {user && <Donate charityId={id} charityName={data.name} />}
         </div>
       </div>
+      {user ? (
+        <Donate charityId={id} charityName={data.name} />
+      ) : (
+        <section className="py-6 has-text-centered has-background-primary-light">
+          <Link to="/register" className="button is-primary">
+            Sign up to donate!
+          </Link>
+          <p className="py-4">
+            <span>Already have an account? </span>
+            <span>
+              <Link to="/login">Log in</Link>
+            </span>
+          </p>
+        </section>
+      )}
     </div>
   );
 };

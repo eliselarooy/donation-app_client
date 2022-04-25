@@ -57,7 +57,7 @@ const Donate = ({ charityId, charityName }) => {
   console.log('error message', errorMessage);
 
   return (
-    <div className="box">
+    <div className="box has-background-primary-light">
       <h1 className="title is-5">Donate to {charityName}</h1>
       <form onSubmit={handleSubmit}>
         <div className="field">
@@ -97,7 +97,7 @@ const Donate = ({ charityId, charityName }) => {
         </div>
 
         <div className="control">
-          <button type="submit" className="button">
+          <button type="submit" className="button is-primary">
             Add donation
           </button>
         </div>
