@@ -1,13 +1,12 @@
 import axios from 'axios';
-
-const localbaseurl = 'http://localhost:8000';
-
-const baseurl = 'https://project4elr.herokuapp.com';
+import { baseUrl } from '../config.js';
+// const localbaseurl = 'http://localhost:8000';
+// const baseurl = 'https://project4elr.herokuapp.com';
 
 export const getAllDonations = async () => {
   const options = {
     method: 'GET',
-    url: `${localbaseurl}/donations/single/`,
+    url: `${baseUrl}/donations/single/`,
   };
 
   const { data } = await axios.request(options);
@@ -18,7 +17,7 @@ export const getAllDonations = async () => {
 export const getAllDonationsForUser = async () => {
   const options = {
     method: 'GET',
-    url: `${localbaseurl}/donations/user/single/`,
+    url: `${baseUrl}/donations/user/single/`,
     headers: {
       authorization: `Bearer ${window.sessionStorage.getItem('token')}`,
     },
@@ -31,7 +30,7 @@ export const getAllDonationsForUser = async () => {
 export const createDonation = async (formData) => {
   const options = {
     method: 'POST',
-    url: `${localbaseurl}/donations/single/create/`,
+    url: `${baseUrl}/donations/single/create/`,
     data: formData,
     headers: {
       authorization: `Bearer ${window.sessionStorage.getItem('token')}`,
@@ -46,7 +45,7 @@ export const createDonation = async (formData) => {
 export const getAllCharities = async () => {
   const options = {
     method: 'GET',
-    url: 'http://localhost:8000/charities/',
+    url: `${baseUrl}/charities/`,
   };
 
   const { data } = await axios.request(options);
@@ -57,7 +56,7 @@ export const getAllCharities = async () => {
 export const getCharityById = async (id) => {
   const options = {
     method: 'GET',
-    url: `http://localhost:8000/charities/${id}`,
+    url: `${baseUrl}/charities/${id}/`,
   };
 
   const { data } = await axios.request(options);

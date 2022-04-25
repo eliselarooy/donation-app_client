@@ -1,13 +1,12 @@
 import axios from 'axios';
-
-const localbaseurl = 'http://localhost:8000';
-
-const baseurl = 'https://project4elr.herokuapp.com';
+import { baseUrl } from '../config.js';
+// const localbaseurl = 'http://localhost:8000';
+// const baseurl = 'https://project4elr.herokuapp.com';
 
 export const login = async (credentials) => {
   const options = {
     method: 'POST',
-    url: `${localbaseurl}/authentication/login/`,
+    url: `${baseUrl}/authentication/login/`,
     data: credentials,
   };
 
@@ -25,7 +24,7 @@ export const login = async (credentials) => {
 export const register = async (credentials) => {
   const options = {
     method: 'POST',
-    url: 'http://localhost:8000/authentication/register/',
+    url: `${baseUrl}/authentication/register/`,
     data: credentials,
   };
 
