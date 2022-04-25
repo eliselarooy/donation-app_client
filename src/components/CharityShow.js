@@ -22,7 +22,7 @@ const CharityShow = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container full-height-content">
       <div className="columns">
         <div className="column is-one-third">
           <figure className="image">
