@@ -2,15 +2,15 @@ import React from 'react';
 import { login } from '../api/auth.js';
 import { useNavigate, Link } from 'react-router-dom';
 import { getLoggedInUserId } from '../lib/auth.js';
+import { UserContext } from './UserContext';
 
-const Login = (props) => {
+const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     email: '',
     password: '',
   });
-
-  console.log('props', props);
+  const { setUser } = React.useContext(UserContext);
 
   const [responseErrorMessage, setResponseErrorMessage] = React.useState('');
 
@@ -40,8 +40,8 @@ const Login = (props) => {
       setError('');
       try {
         const data = await login(formData);
-        console.log('data', data);
-        props.setLoggedIn(getLoggedInUserId());
+        console.log('login data', data);
+        setUser(getLoggedInUserId());
         navigate('/profile');
       } catch (err) {
         console.error(err);

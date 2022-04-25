@@ -9,30 +9,29 @@ import Profile from './Profile';
 import Footer from './Footer';
 import CharityShow from './CharityShow';
 import PieChart from './PieChart';
+import { UserContext } from './UserContext';
 
 import '../styles/style.scss';
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = React.useState(getLoggedInUserId());
+  const [user, setUser] = React.useState(getLoggedInUserId());
+
+  const value = React.useMemo(() => ({ user, setUser }), [user, setUser]);
 
   return (
     <BrowserRouter>
-      <Navbar {...{ loggedIn, setLoggedIn }} />
-      <Routes>
-        <Route path="/" element={<Home {...{ loggedIn, setLoggedIn }} />} />
-        <Route
-          path="/login"
-          element={<Login {...{ loggedIn, setLoggedIn }} />}
-        />
-        <Route
-          path="/register"
-          element={<Register {...{ loggedIn, setLoggedIn }} />}
-        />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/charities/:id" element={<CharityShow />} />
-        <Route path="/piechart" element={<PieChart />} />
-      </Routes>
-      <Footer />
+      <UserContext.Provider value={value}>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/charities/:id" element={<CharityShow />} />
+          <Route path="/piechart" element={<PieChart />} />
+        </Routes>
+        <Footer />
+      </UserContext.Provider>
     </BrowserRouter>
   );
 };
