@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getLoggedInUserId } from '../lib/auth';
+import { UserContext } from './UserContext';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Navbar from './Navbar';
-import Profile from './Profile';
 import Footer from './Footer';
 import CharityShow from './CharityShow';
 import PieChart from './PieChart';
-import { UserContext } from './UserContext';
+import Tab from './Tab';
 
 import '../styles/style.scss';
 
@@ -26,7 +26,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Tab />} />
           <Route path="/charities/:id" element={<CharityShow />} />
           <Route path="/piechart" element={<PieChart />} />
         </Routes>

@@ -22,3 +22,54 @@ $link: rgb(236, 77, 130);
 .full-height-content {
   min-height: calc(100vh - 72px - 168px);
 }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #444;
+}
+
+.tab-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+
+  li {
+    display: inline-flex;
+
+    a {
+      text-decoration: none;
+      color: darkgray;
+      padding: 10px;
+      transition: all .3s ease-in-out;
+      border-bottom: 1px solid transparent;
+
+      &:hover {
+        color: gray;
+      }
+    }
+  }
+}
+
+.nav .active a {
+  color: $link;
+  border-bottom: 1px solid $link;
+
+  &:hover {
+    border-color: transparent;
+    background: $link;
+    color: white;
+  }
+}
+
+.tab-pane {
+  padding-top: 10px;
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
