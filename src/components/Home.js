@@ -20,7 +20,6 @@ const filterNames = Object.keys(filterMap);
 function Home() {
   const [data, setData] = React.useState(null);
   const [filter, setFilter] = React.useState('All');
-  const [selected, setSelected] = React.useState('All');
 
   const { user } = React.useContext(UserContext);
 
@@ -33,14 +32,13 @@ function Home() {
   }, []);
 
   const handleFilter = (e) => {
-    setSelected(e.target.name);
     setFilter(e.target.name);
   };
 
   let filteredData;
 
   const isSelected = (name) => {
-    return selected.includes(name);
+    return filter.includes(name);
   };
 
   if (data) {
