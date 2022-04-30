@@ -50,7 +50,7 @@ function Home() {
   }
 
   return (
-    <>
+    <div className="full-height-content">
       <section className="hero is-large hero-background">
         <div className="hero-body">
           <h1 className="title is-size-1 has-text-white">Donate!</h1>
@@ -113,7 +113,7 @@ function Home() {
           })}
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
