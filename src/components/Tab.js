@@ -16,25 +16,21 @@ const Tab = () => {
   return (
     <>
       <div className="tab-container full-height-content">
+        <h1 className="title">Your Donations</h1>
         <ul className="nav-tab nav">
           <li
             className={isSelected('oneoff') ? 'active' : ''}
             onClick={handleClick}
           >
-            <a href="#oneoff" name="oneoff">
-              One-off Donations
-            </a>
+            <button name="oneoff">One-off Donations</button>
           </li>
           <li
             className={isSelected('monthly') ? 'active' : ''}
             onClick={handleClick}
           >
-            <a href="#monthly" name="monthly">
-              Monthly Donations
-            </a>
+            <button name="monthly">Monthly Donations</button>
           </li>
         </ul>
-
         <div className="tab-content">
           <div
             className={isSelected('oneoff') ? 'tab-pane active' : 'tab-pane'}

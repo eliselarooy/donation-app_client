@@ -40,7 +40,10 @@ ul {
   li {
     display: inline-flex;
 
-    a {
+    button {
+      font-size: 100%;
+      background-color: white;
+      border: none;
       text-decoration: none;
       color: darkgray;
       padding: 10px;
@@ -54,7 +57,7 @@ ul {
   }
 }
 
-.nav .active a {
+.nav .active button {
   color: $link;
   border-bottom: 1px solid $link;
 

@@ -44,9 +44,8 @@ const Profile = () => {
   }
 
   return (
-    <div className="has-full-height-content">
+    <>
       <div className="container">
-        <h1 className="title">Your Donations</h1>
         <table className="table">
           <thead>
             <tr>
@@ -81,7 +80,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
