@@ -1,5 +1,7 @@
 # Donation App - GA Project 4
 
+![homepage](./assets/homepage.png)
+
 ## Overview
 A donation app where users can find charities, add donations and view their personal dashboard. This was a solo project and my final project in the General Assembly Software Engineering course. 
 
@@ -23,8 +25,10 @@ Build a full-stack application with a Python Django API, using the Django REST F
 I began with planning the basic functionality and drawing an entity relationship diagram (ERD) and basic wireframe for the project. 
 
 Database ERD:
+![ERD](./assets/erd.png)
 
 Wireframe:
+![wireframe](./assets/wireframe.png)
 
 ### Backend
 I first made a simple ‘Hello World’ Django application and deployed it to Heroku. Then, I connected the app to a PostgreSQL database. 
