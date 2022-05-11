@@ -137,6 +137,17 @@ I created tabs for ‘One-off’ and ‘Monthly’ donations on the profile page
 #### Logged-in State
 Conditional rendering is used to display different elements based on whether the user is logged in. However, if the user logged out whilst on the homepage, the homepage did not update to show the ‘Sign up to get started’ banner. Some research led me to use context to keep track of the logged-in state across multiple components and avoid prop drilling. I found this really helpful as I could simply access the context wherever it was needed with the _useContext_ hook. 
 
+```javascript
+const { user, setUser } = React.useContext(UserContext);
+const navigate = useNavigate();
+  
+const logOut = () => {
+  sessionStorage.removeItem('token');
+  setUser(getLoggedInUserId());
+  navigate('/');
+};
+```
+
 #### Filtering Charities
 On the homepage, I wanted the option to filter the charities listed by category. Given that all charities are fetched from the API on page load, it made sense to do the filtering on the frontend. I found writing this particularly rewarding as it involved creating an object containing different methods which are used based on the category button clicked. 
 
