@@ -13,9 +13,10 @@ The app is deployed using Heroku and Netlify and is available here &rarr; https:
 
 Please give it a chance to wake up as the free servers on Heroku sleep when they are not in use. 
 
-Feel free to register your own account, or you can use email `elise@email.com` and password `password!1`.
-
+Feel free to register your own account, or you can use email `elise@email.com` and password `password!1`. 
 No actual donations are made. 
+
+This repo contains code for the frontend only. The code for the backend is [here](https://github.com/eliselarooy/donation-app_api).
 
 ## The Brief
 Build a full-stack application with a Python Django API, using the Django REST Framework to serve data from a PostgreSQL database and consume the API with a separate frontend built with React.
