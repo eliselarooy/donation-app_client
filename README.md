@@ -161,9 +161,6 @@ Setting up the backend was surprisingly quick as Django provides a great deal of
 
 I am pleased with both the server-side and client-side form validation. 
 
-## Key Learnings 
-This project has given me practical experience using Python and Django and helped solidify my learning. I have also gained a greater understanding of relational databases and their advantages for storing structured data and handling connections between data points.
-
 ## Future Improvements
 - Build monthly donations into the frontend with the following features: 
   - Donation form with the option to select either ‘One-off’ or ‘Monthly’
@@ -172,3 +169,5 @@ This project has given me practical experience using Python and Django and helpe
 - Paginate the table of donations when the number of donations exceeds a certain number
 - Add a charity keyword search
 
+## Key Learnings 
+This project has given me practical experience using Python and Django and helped solidify my learning. I have also gained a greater understanding of relational databases and their advantages for storing structured data and handling connections between data points.
