@@ -1,12 +1,57 @@
+<div id="top"></div>
+
 # Donation App - GA Project 4
 
 ![homepage](./assets/homepage.png)
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#overview">Overview</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#the-brief">The Brief</a></li>
+    <li><a href="#approach">Approach</a>
+        <ul>
+        <li><a href="#planning">Planning</a></li>
+      </ul>
+      <ul>
+        <li><a href="#backend">Backend</a></li>
+      </ul>
+      <ul>
+        <li><a href="#frontend">Frontend</a></li>
+      </ul>
+    </li>
+    <li><a href="#wins">Wins</a></li>
+    <li><a href="#future-improvements">Future Improvements</a></li>
+    <li><a href="#key-learnings">Key Learnings</a></li>
+  </ol>
+</details>
+
+<!-- OVERVIEW -->
 ## Overview
 A donation app where users can find charities, add donations and view their personal dashboard. This was a solo project and my final project in the General Assembly Software Engineering course. 
 
-> **Duration:** 10 days \
-> **Technologies:** PostgreSQL, Python, Django (Django REST framework), PyJWT (JSON Web Token), React, Axios, Bulma/SCSS
+- **Duration:** 10 days
+
+### Built With
+- PostgreSQL
+- Python
+- Django (Django REST framework)
+- PyJWT (JSON Web Token)
+- React
+- Axios
+- Bulma/SCSS
+
+This repo contains code for the frontend only. The code for the backend is [here](https://github.com/eliselarooy/donation-app_api).
+
+<!-- INSTALLATION -->
+## Installation
 
 The app is deployed using Heroku and Netlify and is available here &rarr; https://donation-app-project.netlify.app/ \
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e73272b5-823f-436c-a2d4-6db85532f5b3/deploy-status)](https://app.netlify.com/sites/donation-app-project/deploys)
@@ -16,11 +61,22 @@ Please give it a chance to wake up as the free servers on Heroku sleep when they
 Feel free to register your own account, or you can use email `elise@email.com` and password `password!1`. 
 No actual donations are made. 
 
-This repo contains code for the frontend only. The code for the backend is [here](https://github.com/eliselarooy/donation-app_api).
+Or run it locally:
 
+Server:
+1. Clone the [backend](https://github.com/eliselarooy/donation-app_api) repository
+2. Run `pipenv shell` → `pipenv install` → `python manage.py migrate` → `python manage.py loaddata seed_data.json` → `python manage.py runserver`
+
+Client: 
+1. Clone this repository
+2. Run `npm install` to install npm packages 
+3. Run `npm start:client` and open http://localhost:8001 in the browser
+
+<!-- THE BRIEF -->
 ## The Brief
 Build a full-stack application with a Python Django API, using the Django REST Framework to serve data from a PostgreSQL database and consume the API with a separate frontend built with React.
 
+<!-- APPROACH -->
 ## Approach
 ### Planning
 I began with planning the basic functionality and drawing an entity relationship diagram (ERD) and basic wireframe for the project. 
@@ -156,11 +212,13 @@ const logOut = () => {
 #### Filtering Charities
 On the homepage, I wanted the option to filter the charities listed by category. Given that all charities are fetched from the API on page load, it made sense to do the filtering on the frontend. I found writing this particularly rewarding as it involved creating an object containing different methods which are used based on the category button clicked. 
 
+<!-- WINS -->
 ## Wins
 Setting up the backend was surprisingly quick as Django provides a great deal of functionality out of the box. It was useful to take advantage of Django’s generic views and then use class-based views to tailor to a specific use case.
 
 I am pleased with both the server-side and client-side form validation. 
 
+<!-- FUTURE IMPROVEMENTS -->
 ## Future Improvements
 - Build monthly donations into the frontend with the following features: 
   - Donation form with the option to select either ‘One-off’ or ‘Monthly’
@@ -169,5 +227,8 @@ I am pleased with both the server-side and client-side form validation.
 - Paginate the table of donations when the number of donations exceeds a certain number
 - Add a charity keyword search
 
+<!-- KEY LEARNINGS -->
 ## Key Learnings 
 This project has given me practical experience using Python and Django and helped solidify my learning. I have also gained a greater understanding of relational databases and their advantages for storing structured data and handling connections between data points.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
